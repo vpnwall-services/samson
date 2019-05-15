@@ -40,6 +40,7 @@ module Kubernetes
       validate_not_matching_team
       validate_stateful_set_service_consistent
       validate_stateful_set_restart_policy
+      validate_load_balancer
       unless validate_annotations
         validate_prerequisites_kinds
         validate_prerequisites_consistency
@@ -77,6 +78,12 @@ module Kubernetes
     end
 
     private
+
+    def validate_load_balancer
+      return unless allowed = ENV["KUBERNETES_ALLOWED_LOAD_BALANCER_NAMESPACE"]
+      return if @elements.none? { |e| e[:type] == "LoadBalancer" && e.dig(:metadata, :namespace) != allowed }
+      @errors << "Don't use LBs"
+    end
 
     def validate_name
       @errors << "Needs a metadata.name" unless map_attributes([:metadata, :name]).all?
