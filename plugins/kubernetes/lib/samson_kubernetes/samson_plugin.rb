@@ -35,7 +35,10 @@ Samson::Hooks.view :deploy_group_table_header, "samson_kubernetes"
 Samson::Hooks.view :deploy_group_table_cell, "samson_kubernetes"
 
 Samson::Hooks.callback :deploy_group_permitted_params do
-  {cluster_deploy_group_attributes: [:kubernetes_cluster_id, :namespace]}
+  [
+    :kubernetes_kritis_breakglass,
+    {cluster_deploy_group_attributes: [:kubernetes_cluster_id, :namespace]}
+  ]
 end
 Samson::Hooks.callback(:stage_permitted_params) do
   [

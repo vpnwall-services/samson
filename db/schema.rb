@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_14_231932) do
+ActiveRecord::Schema.define(version: 2019_05_28_173915) do
 
   create_table "audits" do |t|
     t.integer "auditable_id", null: false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_231932) do
     t.string "permalink", null: false
     t.integer "vault_server_id"
     t.string "name_sortable", null: false
+    t.boolean "kubernetes_kritis_breakglass", default: false, null: false
     t.index ["environment_id"], name: "index_deploy_groups_on_environment_id"
     t.index ["permalink"], name: "index_deploy_groups_on_permalink", unique: true, length: 191
   end

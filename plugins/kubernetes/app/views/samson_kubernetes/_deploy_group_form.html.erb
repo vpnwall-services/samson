@@ -6,3 +6,5 @@
 
   <%= cluster_form.input :namespace, label: "Kubernetes Namespace", help: "Used when metadata.namespace is not set" %>
 <% end %>
+
+<%= form.input :kubernetes_kritis_breakglass, as: :check_box, help: "Make all resources skip kritis" %>
